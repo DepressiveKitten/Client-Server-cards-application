@@ -20,6 +20,6 @@ namespace Cards.Services.JsonStorage
         /// </summary>
         /// <param name="cards">collection of <see cref="Card"/> to serialize.</param>
         /// <returns>String with Json document.</returns>
-        public string Deserialize(IEnumerable<Card> cards);
+        public string Serialize(IEnumerable<Card> cards);
     }
 }

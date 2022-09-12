@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cards.Services.InMemory;
+using Microsoft.EntityFrameworkCore;
 
 namespace Server
 {
@@ -24,11 +26,15 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<CardsContext>(opt =>
+                opt.UseInMemoryDatabase("Cards"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
         {
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -52,6 +58,13 @@ namespace Server
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //TODO: seed database from Json;
+        }
+
+        private void OnShutdown()
+        {
+            // TODO: save changes to JSON
         }
     }
 }

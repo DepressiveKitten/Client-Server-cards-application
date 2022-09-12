@@ -29,7 +29,7 @@ namespace Cards.Services.JsonStorage.Serialization
         }
 
         /// <inheritdoc/>
-        public string Deserialize(IEnumerable<Card> cards)
+        public string Serialize(IEnumerable<Card> cards)
         {
             JsonCardListDocument document = new JsonCardListDocument();
             document.jsonCards = (from card in cards

@@ -4,4 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cards.Services.InMemory\Cards.Services.InMemory.csproj" />
+    <ProjectReference Include="..\Cards.Services.JsonStorage.Serialization\Cards.Services.JsonStorage.Serialization.csproj" />
+    <ProjectReference Include="..\Cards.Services.JsonStorage\Cards.Services.JsonStorage.csproj" />
+    <ProjectReference Include="..\Cards.Services\Cards.Services.csproj" />
+  </ItemGroup>
+
 </Project>
