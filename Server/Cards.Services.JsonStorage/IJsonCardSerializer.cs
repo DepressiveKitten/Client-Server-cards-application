@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using Cards.Services;
-
-namespace Cards.Services.JsonStorage
+﻿namespace Cards.Services.JsonStorage
 {
+    using System.Collections.Generic;
+
     /// <summary>
-    /// Serialize and Deserialize <see cref="Card"/> collection into Json document./>
+    /// Serialize and Deserialize <see cref="Card"/> collection into Json document.
     /// </summary>
     public interface IJsonCardSerializer
     {
         /// <summary>
-        /// Deserialize Json document into <see cref="Card"/>
+        /// Deserialize Json document into <see cref="Card"/>.
         /// </summary>
         /// <param name="input">String with Json document.</param>
         /// <returns>Cards.</returns>

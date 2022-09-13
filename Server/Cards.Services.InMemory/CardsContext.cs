@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Cards.Services.InMemory
+﻿namespace Cards.Services.InMemory
 {
+    using Microsoft.EntityFrameworkCore;
+
     public class CardsContext : DbContext
     {
         public CardsContext(DbContextOptions<CardsContext> options)
-            :base(options)
+            : base(options)
         {
-            Database.EnsureCreated();
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Card> Cards { get; set; }

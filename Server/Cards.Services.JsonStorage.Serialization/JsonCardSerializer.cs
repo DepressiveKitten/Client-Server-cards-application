@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using AutoMapper;
-
-namespace Cards.Services.JsonStorage.Serialization
+﻿namespace Cards.Services.JsonStorage.Serialization
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.Json;
+    using AutoMapper;
+
     /// <inheritdoc/>
     public class JsonCardSerializer : IJsonCardSerializer
     {
@@ -24,7 +24,7 @@ namespace Cards.Services.JsonStorage.Serialization
         {
             JsonCardListDocument document = JsonSerializer.Deserialize<JsonCardListDocument>(input);
 
-            return from item in document.jsonCards
+            return from item in document.JsonCards
                    select this.Mapper.Map<JsonCard, Card>(item);
         }
 
@@ -32,7 +32,7 @@ namespace Cards.Services.JsonStorage.Serialization
         public string Serialize(IEnumerable<Card> cards)
         {
             JsonCardListDocument document = new JsonCardListDocument();
-            document.jsonCards = (from card in cards
+            document.JsonCards = (from card in cards
                                  select this.Mapper.Map<Card, JsonCard>(card)).ToList();
             return JsonSerializer.Serialize<JsonCardListDocument>(document);
         }

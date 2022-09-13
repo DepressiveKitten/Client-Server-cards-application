@@ -1,48 +1,54 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.Extensions.Configuration;
-
-namespace Cards.Services.JsonStorage
+﻿namespace Cards.Services.JsonStorage
 {
-    /// <inheritdoc/>
-    class CardsJsonStorage : ICardFileStorage
-    {
-        private readonly static string storageNameNode = "json-storage-name";
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using Microsoft.Extensions.Configuration;
 
+    /// <inheritdoc/>
+    public class CardsJsonStorage : ICardFileStorage
+    {
+        private static readonly string StorageNameNode = "json-storage-name";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardsJsonStorage"/> class.
+        /// </summary>
+        /// <param name="serializer">serializer.</param>
+        /// <param name="configuration">app configuration.</param>
         public CardsJsonStorage(IJsonCardSerializer serializer, IConfiguration configuration)
         {
             this.Serializer = serializer;
             this.Configuration = configuration;
         }
 
-        public IJsonCardSerializer Serializer { get; set; }
-        public IConfiguration Configuration { get; set; }
+        private IJsonCardSerializer Serializer { get; }
+
+        private IConfiguration Configuration { get; }
 
         /// <inheritdoc/>
         public IEnumerable<Card> ReadAll()
         {
-            if (!File.Exists(Configuration[storageNameNode]))
+            if (!File.Exists(this.Configuration[StorageNameNode]))
             {
                 return Enumerable.Empty<Card>();
             }
 
             string document;
 
-            using (StreamReader reader = new StreamReader(Configuration[storageNameNode]))
+            using (StreamReader reader = new StreamReader(this.Configuration[StorageNameNode]))
             {
                 document = reader.ReadToEnd();
             }
 
-            return Serializer.Deserialize(document);
+            return this.Serializer.Deserialize(document);
         }
 
         /// <inheritdoc/>
         public bool WriteAll(IEnumerable<Card> cards)
         {
-            using (StreamWriter writer = new StreamWriter(Configuration[storageNameNode],false))
+            using (StreamWriter writer = new StreamWriter(this.Configuration[StorageNameNode], false))
             {
-                writer.Write(Serializer.Serialize(cards));
+                writer.Write(this.Serializer.Serialize(cards));
             }
 
             return true;

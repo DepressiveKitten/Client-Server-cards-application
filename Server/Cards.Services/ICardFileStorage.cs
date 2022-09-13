@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Cards.Services
+﻿namespace Cards.Services
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represent a service that saves and loads all cards from file.
     /// </summary>

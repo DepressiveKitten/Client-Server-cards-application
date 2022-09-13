@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Cards.Services
+﻿namespace Cards.Services
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Represent a storage for cards.
     /// </summary>
@@ -11,21 +11,21 @@ namespace Cards.Services
         /// <summary>
         /// Shows all cards.
         /// </summary>
-        /// <returns>A <see cref="IAsyncEnumerable{T}"> od <see cref="Card"></returns>
+        /// <returns>A <see cref="IAsyncEnumerable{T}"> of <see cref="Card"> elements.</returns>
         IAsyncEnumerable<Card> GetCardsAsync();
 
         /// <summary>
         /// Try to show a card with specified identifier.
         /// </summary>
-        /// <param name="cardId">A card identifier</param>
+        /// <param name="cardId">A card identifier.</param>
         /// <returns>Returns true if a card is returned; otherwise false.</returns>
         Task<(bool, Card)> TryGetCardAsync(int cardId);
 
         /// <summary>
         /// Creates a new card.
         /// </summary>
-        /// <param name="card">A <see cref="Card"> to create.</param>
-        /// <returns>An identifier of a created card.</returns>
+        /// <param name="card">A <see cref="Card"> to create.</param>.
+        /// <returns>1 if card was created.</returns>
         Task<int> CreateCardAsync(Card card);
 
         /// <summary>

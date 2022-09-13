@@ -18,8 +18,6 @@
         /// <summary>
         /// Gets or sets a card image.
         /// </summary>
-#pragma warning disable CA1819 // Properties should not return arrays
-        public byte[] Image { get; set; }
-#pragma warning restore CA1819 // Properties should not return arrays
+        public string Image { get; set; }
     }
 }

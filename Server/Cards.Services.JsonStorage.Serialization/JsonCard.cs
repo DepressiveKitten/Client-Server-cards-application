@@ -1,7 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Cards.Services.JsonStorage.Serialization
+﻿namespace Cards.Services.JsonStorage.Serialization
 {
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Element for Json serialization.
     /// </summary>
@@ -22,9 +22,7 @@ namespace Cards.Services.JsonStorage.Serialization
         /// <summary>
         /// Gets or sets a card image.
         /// </summary>
-#pragma warning disable CA1819 // Properties should not return arrays
         [JsonPropertyName("image")]
-        public byte[] Image { get; set; }
-#pragma warning restore CA1819 // Properties should not return arrays
+        public string Image { get; set; }
     }
 }

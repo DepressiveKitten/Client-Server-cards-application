@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-
-namespace Cards.Services.JsonStorage.Serialization
+﻿namespace Cards.Services.JsonStorage.Serialization
 {
+    using System.Collections.Generic;
+    using System.Text.Json.Serialization;
+
     /// <summary>
     /// Element for Json Deserialization.
     /// </summary>
@@ -12,6 +12,6 @@ namespace Cards.Services.JsonStorage.Serialization
         /// Gets or Sets page data.
         /// </summary>
         [JsonPropertyName("cards")]
-        public List<JsonCard> jsonCards { get; set; }
+        public List<JsonCard> JsonCards { get; set; }
     }
 }

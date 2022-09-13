@@ -1,18 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Cards.Services.InMemory
+﻿namespace Cards.Services.InMemory
 {
-    class CardStorageService : ICardStorageService
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    /// <inheritdoc/>
+    public class CardStorageService : ICardStorageService
     {
         private readonly CardsContext context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CardStorageService"/> class.
+        /// </summary>
+        /// <param name="context">Database context.</param>
         public CardStorageService(CardsContext context)
         {
             this.context = context;
         }
 
+        /// <inheritdoc/>
         public async Task<int> CreateCardAsync(Card card)
         {
             this.context.Cards.Add(card);
@@ -20,6 +26,7 @@ namespace Cards.Services.InMemory
             return rowsAffected;
         }
 
+        /// <inheritdoc/>
         public async Task<bool> DeleteCardAsync(int cardId)
         {
             var card = await this.context.Cards.FindAsync(cardId);
@@ -33,11 +40,13 @@ namespace Cards.Services.InMemory
             return true;
         }
 
+        /// <inheritdoc/>
         public IAsyncEnumerable<Card> GetCardsAsync()
         {
             return this.context.Cards.AsAsyncEnumerable();
         }
 
+        /// <inheritdoc/>
         public async Task<(bool, Card)> TryGetCardAsync(int cardId)
         {
             var card = await this.context.Cards.FindAsync(cardId);
@@ -49,6 +58,7 @@ namespace Cards.Services.InMemory
             return (true, card);
         }
 
+        /// <inheritdoc/>
         public async Task<bool> UpdateCardAsync(int cardId, Card card)
         {
             var upd = await this.context.Cards.FindAsync(cardId);
@@ -58,10 +68,11 @@ namespace Cards.Services.InMemory
                 return false;
             }
 
-            if (card.Image != Array.Empty<byte>())
+            if (!string.IsNullOrEmpty(card.Image))
             {
                 upd.Image = card.Image;
             }
+
             if (!string.IsNullOrEmpty(card.Name))
             {
                 upd.Name = card.Name;
